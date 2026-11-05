@@ -136,14 +136,14 @@ ANX_SLAVE_CMD pdcp_init[] = {
 	{ END, END, END }
 };
 
-#define SW_H_ACTIVE 1200
-#define SW_HFP 40
+#define SW_H_ACTIVE 800
+#define SW_HFP 32
 #define SW_HSYNC 20
-#define SW_HBP 40
-#define SW_V_ACTIVE 1920
-#define SW_VFP 18
+#define SW_HBP 50
+#define SW_V_ACTIVE 1280
+#define SW_VFP 16
 #define SW_VSYNC 2
-#define SW_VBP 20
+#define SW_VBP 26
 
 ANX_SPI_CMD spi_init[] = {
 	{ SW_H_ACTIVE_L, SW_H_ACTIVE & 0xff },
@@ -162,7 +162,7 @@ ANX_SPI_CMD spi_init[] = {
 	{ SW_VSYNC_H, SW_VSYNC >> 8 },
 	{ SW_VBP_L, SW_VBP & 0xff },
 	{ SW_VBP_H, SW_VBP >> 8 },
-	{ SW_PANEL_FRAME_RATE, 60 },
+	{ SW_PANEL_FRAME_RATE, 90 },
 	{ SW_PANEL_INFO_0, 3 << REG_MIPI_LANE_COUNT_SHIFT },
 	{ SW_PANEL_INFO_1, SET_DPHY_TIMING | (2 << REG_PANEL_TRANS_MODE_SHIFT) }, // DSC_NO_DSC | BURST
 	{ MISC_NOTIFY_OCM1, 0x7b }, // ??
@@ -325,8 +325,8 @@ int main(int argc, char ** argv)
 	offset2 += offset;
 	while (bios[offset2] != 0)
 		offset2++;
-	memcpy(&bios[offset-1], " DeckHD", 7);
-	memcpy(&bios[offset2-1], " DeckHD", 7);
+	memcpy(&bios[offset-1], "LCDOLED", 7);
+	memcpy(&bios[offset2-1], "LCDOLED", 7);
 
 {
 	FILE *f = fopen(argv[2], "wb");
